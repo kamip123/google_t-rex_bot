@@ -6,38 +6,41 @@ from numpy import array
 
 
 def up():
+    print('jump')
     pg.keyUp("down")
-    time.sleep(0.01)
+    time.sleep(0.03)
     pg.press("space")
     time.sleep(0.18)
     pg.keyDown("down")
 
 
 def boot():
-    pg.moveTo(280, 400)
+    pg.moveTo(480, 350)
     pg.click()
-    i = 15
-    current_value = 497
+    i = 8
+    current_value = 447
     current_x2 = 370
     time_start = time.time()
+    pg.keyDown("down")
     while 1:
         current_time = time.time() - time_start
         if current_time > i:
-            i += 15
+            i += 8
             current_x2 += 10
             current_value += 50
-        box = (320, 395, current_x2, 400)
-
+        box = (330, 395, current_x2, 400)
         img = ImageOps.grayscale(ImageGrab.grab(box))
         a = array(img.getcolors())
         a = int(a.sum())
-
-        # time.sleep(0.01)
         print(a)
-        # +100 with each iteration
+        # +50 with each iteration
         if a != current_value:
             up()
 
 
 if __name__ == "__main__":
     boot()
+
+# todo
+# 1. Fix mistakes that sometimes occur between 0-200
+# 2. test i = 9 and 10
